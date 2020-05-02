@@ -1,0 +1,47 @@
+[package]
+name = "redis-module"
+version = "0.8.0"
+authors = ["Gavrie Philipson <gavrie@redislabs.com>", "Guy Korland <guy.korland@redislabs.com>"]
+edition = "2018"
+build = "build.rs"
+description = "A toolkit for building Redis modules in Rust"
+license = "BSD-3-Clause"
+repository = "https://github.com/RedisLabsModules/redismodule-rs"
+readme = "README.md"
+
+[[example]]
+name = "hello"
+crate-type = ["cdylib"]
+
+[[example]]
+name = "keys_pos"
+crate-type = ["cdylib"]
+
+[[example]]
+name = "timer"
+crate-type = ["cdylib"]
+required-features = ["experimental-api"]
+
+[[example]]
+name = "data_type"
+crate-type = ["cdylib"]
+
+[dependencies]
+bitflags = "1.2"
+libc = "0.2"
+enum-primitive-derive = "^0.1"
+num-traits = "^0.2"
+#failure = "0.1"
+
+[build-dependencies]
+bindgen = "0.53"
+cc = "1.0"
+
+[features]
+default = []
+experimental-api = []
+
+# Workaround to allow cfg(feature = "test") in dependencies:
+# https://github.com/rust-lang/rust/issues/59168#issuecomment-472653680
+# This requires running the tests with `--features test`
+test = []
